@@ -66,7 +66,9 @@ Start from the **best vanilla Conv-TasNet checkpoint**, replace all pointwise li
 
 ### Experiment 2 — Early-epoch factorization + continued training
 
-Instead of waiting for full convergence, we factorize the model at **epoch 1, 5, or 10**, then continue training.
+Instead of waiting for full convergence, we factorize the model at **epoch 1, 5, or 10**, then continue training, or start with random initialization.
+
+Note: Here $k_{\mathrm{eff}}$ refers to the effective rank at each layer; $k_{\mathrm{uni}}$ refers to a uniform rank throughout all layers, which is chosen as $80$; the range for ascending and descending ranks is: 20% - 100% of the effective rank, 20 - 100 for uniform rank in random initialization.
 
 | Setting | Compression Ratio | Best Loss after Training | Checkpoint / Initial Factored Loss |
 |---|---:|---:|---:|
@@ -74,13 +76,23 @@ Instead of waiting for full convergence, we factorize the model at **epoch 1, 5,
 | Epoch 5 ($k_{\mathrm{eff}}$) | 1.34× | -13.7195 (ep +88) | -9.6479 / -9.6290 |
 | Epoch 1 ($k_{\mathrm{eff}}$) | 1.39× | -13.5912 (ep +95) | -5.8962 / -5.8926 |
 | Random init ($k_{\mathrm{eff}}$) | 1.10× | -8.4764 (ep +100) | -- / -- |
+| Random Init ($k_{\mathrm{uni}}$) | 1.27x | -9.5967 (ep +95) | -- / -- |
 | Epoch 10 ($0.5 \ k_{\mathrm{eff}}$) | 2.39× | -13.6216 (ep +83) | -10.8078 / -10.1671 |
 | Epoch 5 ($0.5\ k_{\mathrm{eff}}$) | 2.59× | -13.3547 (ep +81) | -9.6479 / -9.3568 |
 | Epoch 1 ($0.5\ k_{\mathrm{eff}}$) | 2.68× | -13.3419 (ep +89) | -5.8962 / -5.8578 |
+| Random Init ($0.5\ k_{\mathrm{uni}}$) | 2.46x | -13.1355 (ep +97) | -- / -- |
 | Epoch 10 ($0.25\ k_{\mathrm{eff}}$) | 4.49× | -12.9179 (ep +69) | -10.8078 / -7.7510 |
 | Epoch 5 ($0.25\ k_{\mathrm{eff}}$) | 4.84× | -12.2960 (ep +85) | -9.6479 / -7.8804 |
 | Epoch 1 ($0.25\ k_{\mathrm{eff}}$) | 4.99× | -12.5440 (ep +85) | -5.8962 / -5.7438 |
-
+| Random Init ($0.25\ k_{\mathrm{uni}}$) | 4.62x | -12.7622 (ep +96) | -- / -- |
+| Epoch 10 ($k_{\mathrm{asc}}$) | 2.06x | -13.4640 (ep +93) | -10.8078 / -9.2964 |
+| Epoch 5 ($k_{\mathrm{asc}}$) | 2.24x | -13.3755 (ep +95) | -9.6479 / -9.2429 | 
+| Epoch 1 ($k_{\mathrm{asc}}$) | 2.37x | -13.3551 (ep +96) | -5.8962 / -5.8610 |
+| Random Init ($k_{\mathrm{asc}}$) | 1.67x | -9.5110 (ep +100) | -- / -- |
+| Epoch 10 ($k_{\mathrm{desc}}$) | 1.98x | -13.6017 (ep +73) | -10.8078 / -9.7609 |
+| Epoch 5 ($k_{\mathrm{desc}}$) | 2.12x | -13.4953 (ep +76) | -9.6479 / -9.0872 | 
+| Epoch 1 ($k_{\mathrm{desc}}$) | 2.17x | -13.4938 (ep +76) | -5.8962 / -5.8267 |
+| Random Init ($k_{\mathrm{desc}}$) | 1.69x | -13.2841 (ep +97) | -- / -- |
 **Summary:**  
 - Early factorization **works surprisingly well**, especially from **epoch 10**.  
 - **Later truncation is consistently stronger** than epoch 5 or epoch 1.  
