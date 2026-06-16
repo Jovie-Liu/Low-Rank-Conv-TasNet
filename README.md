@@ -95,8 +95,9 @@ Note: Here $k_{\mathrm{eff}}$ refers to the effective rank at each layer; $k_{\m
 | Random Init ($k_{\mathrm{desc}}$) | 1.69x | -13.2841 (ep +97) | -- / -- |
 
 **Summary:**  
-- Early factorization **works surprisingly well**, especially from **epoch 10**.  
-- **Later truncation is consistently stronger** than epoch 5 or epoch 1.  
-- **Random-init factorized training is much worse**, suggesting that a short full-parameter warm-up is important.  
-- The same pattern remains: **$k_{\mathrm{eff}}$** is the best trade-off, while stronger compression is possible with a gradual drop in SI-SNR.
+- **$k_{\mathrm{eff}}$ remains the best checkpoint-based rank rule**, giving the strongest final performance at epochs 10, 5, and 1.  
+- **Later factorization is consistently better**: epoch 10 outperforms epoch 5 and epoch 1 across all rank schedules.  
+- **Descending rank schedules are consistently stronger and converge faster than ascending ones**, showing that layer-wise rank allocation matters, not just overall compression.  
+- **Random-init factorized training is harder, but not always bad**: some structured settings, especially **descending rank schedules** and **moderate rank compression**, work much better than random-init with large ranks.
+- The overall pattern suggests that **$k_{\mathrm{eff}}$ is best for preserving learned structure**, while **more structured or more constrained rank schedules may be better for training factorized models from scratch**.
 
