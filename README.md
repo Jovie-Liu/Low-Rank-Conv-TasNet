@@ -66,9 +66,7 @@ Start from the **best vanilla Conv-TasNet checkpoint**, replace all pointwise li
 
 ### Experiment 2 — Early-epoch factorization + continued training
 
-Instead of waiting for full convergence, we factorize the model at **epoch 1, 5, or 10**, then continue training, or start with random initialization.
-
-Note: Here $k_{\mathrm{eff}}$ refers to the effective rank at each layer; $k_{\mathrm{uni}}$ refers to a uniform rank throughout all layers, which is chosen as $80$; the range for ascending and descending ranks is: 20% - 100% of the effective rank, 20 - 100 for uniform rank in random initialization.
+Instead of waiting for full convergence, we factorize the model at **epoch 1, 5, or 10**, then continue training. Here $k_{\mathrm{eff}}$ refers to the effective rank at each layer; the range for ascending and descending ranks is 20% - 100% of the effective rank.
 
 | Setting | Compression Ratio | Best Loss after Training | Checkpoint / Initial Factored Loss |
 |---|---:|---:|---:|
@@ -87,12 +85,6 @@ Note: Here $k_{\mathrm{eff}}$ refers to the effective rank at each layer; $k_{\m
 | Epoch 1 ($0.25\ k_{\mathrm{eff}}$) | 4.99× | -12.5440 (ep +85) | -5.8962 / -5.7438 |
 | Epoch 1 ($k_{\mathrm{asc}}$) | 2.37x | -13.3551 (ep +96) | -5.8962 / -5.8610 |
 | Epoch 1 ($k_{\mathrm{desc}}$) | 2.17x | -13.4938 (ep +76) | -5.8962 / -5.8267 |
-| Random init ($k_{\mathrm{eff}}$) | 1.10× | -8.4764 (ep +100) | -- / -- |
-| Random Init ($k_{\mathrm{uni}}$) | 1.27x | -9.5967 (ep +95) | -- / -- |
-| Random Init ($0.5\ k_{\mathrm{uni}}$) | 2.46x | -13.1355 (ep +97) | -- / -- |
-| Random Init ($0.25\ k_{\mathrm{uni}}$) | 4.62x | -12.7622 (ep +96) | -- / -- |
-| Random Init ($k_{\mathrm{asc}}$) | 1.67x | -9.5110 (ep +100) | -- / -- |
-| Random Init ($k_{\mathrm{desc}}$) | 1.69x | -13.2841 (ep +97) | -- / -- |
 
 **Summary:**  
 - **$k_{\mathrm{eff}}$ remains the best checkpoint-based rank rule**, giving the strongest final performance at epochs 10, 5, and 1.  
@@ -100,4 +92,23 @@ Note: Here $k_{\mathrm{eff}}$ refers to the effective rank at each layer; $k_{\m
 - **Descending rank schedules are consistently stronger and converge faster than ascending ones**, showing that layer-wise rank allocation matters, not just overall compression.  
 - **Random-init factorized training is harder, but not always bad**: some structured settings, especially **descending rank schedules** and **moderate rank compression**, work much better than random-init with large ranks.
 - The overall pattern suggests that **$k_{\mathrm{eff}}$ is best for preserving learned structure**, while **more structured or more constrained rank schedules may be better for training factorized models from scratch**.
+
+---
+
+### Experiment 3 — Random Initialization
+
+
+
+| Rank | Compression Ratio | Best Loss after Training |
+|---|---:|---:|
+| $k_{\mathrm{eff}}$ | 1.10× | -8.4764 (ep +100) |
+| Uniform $80$ | 1.27x | -9.5967 (ep +95) |
+| Uniform $40$ | 2.46x | -13.1355 (ep +97) |
+| Uniform $20$ | 4.62x | -12.7622 (ep +96) |
+| Uniform $10$ |  |  |
+| Uniform $5$ |  |  |
+| Linear $20 - 100$ | 1.67x | -9.5110 (ep +100) |
+| Linear $100 - 20$ | 1.69x | -13.2841 (ep +97) |
+| Linear $10 - 60$ |  |  |
+| Linear $60 - 10$ |  |  |
 
