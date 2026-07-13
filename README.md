@@ -94,7 +94,7 @@ Instead of waiting for full convergence, we factorize the model at **epoch 1, 5,
 
 ### Experiment 3 — Random Initialization
 
-We train the factorized model from scratch with random initialization, without warm-up pretraining. Here $k_{\mathrm{eff}}$ is the effective rank distribution of the best vanilla Conv-TasNet checkpoint. We experiment with various rank structures, including uniform rank and ascending/descending ranks with different shapes and rates (linear, convex, concave).
+We train the factorized model from scratch with **random initialization**, without warm-up pretraining. Here $k_{\mathrm{eff}}$ is the effective rank distribution of the best vanilla Conv-TasNet checkpoint. We experiment with various rank structures, including **uniform rank and ascending/descending ranks with different shapes and rates (linear, convex, concave)**.
 
 | Rank | Compression Ratio | Best Loss after Training |
 |---|---:|---:|
