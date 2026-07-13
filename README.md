@@ -20,8 +20,6 @@ In the first phase of this project, we investigate the low-rank structure of the
   Even at **2.64× compression**, the model recovers most of its performance after fine-tuning.
 - **Factorization is not only post-hoc compression.**  
   If introduced early in training, the model can still learn effectively.
-- **Training a factorized model from scratch is much worse.**  
-  A short period of normal Conv-TasNet training provides a much better starting point.
 
 ---
 
@@ -89,15 +87,14 @@ Instead of waiting for full convergence, we factorize the model at **epoch 1, 5,
 **Summary:**  
 - **$k_{\mathrm{eff}}$ remains the best checkpoint-based rank rule**, giving the strongest final performance at epochs 10, 5, and 1.  
 - **Later factorization is consistently better**: epoch 10 outperforms epoch 5 and epoch 1 across all rank schedules.  
-- **Descending rank schedules are consistently stronger and converge faster than ascending ones**, showing that layer-wise rank allocation matters, not just overall compression.  
-- **Random-init factorized training is harder, but not always bad**: some structured settings, especially **descending rank schedules** and **moderate rank compression**, work much better than random-init with large ranks.
+- **Descending rank schedules are consistently slightly stronger and converge faster than ascending ones**, showing that layer-wise rank allocation matters, not just overall compression.
 - The overall pattern suggests that **$k_{\mathrm{eff}}$ is best for preserving learned structure**, while **more structured or more constrained rank schedules may be better for training factorized models from scratch**.
 
 ---
 
 ### Experiment 3 — Random Initialization
 
-
+We train the factorized model from scratch with random initialization, without warm-up pretraining. Here $k_{\mathrm{eff}}$ is the effective rank distribution of the best vanilla Conv-TasNet checkpoint. We experiment with various rank structures, including uniform rank and ascending/descending ranks with different shapes and rates (linear, convex, concave).
 
 | Rank | Compression Ratio | Best Loss after Training |
 |---|---:|---:|
@@ -105,8 +102,8 @@ Instead of waiting for full convergence, we factorize the model at **epoch 1, 5,
 | Uniform $80$ | 1.27x | -9.5967 (ep +95) |
 | Uniform $40$ | 2.46x | -13.1355 (ep +97) |
 | Uniform $20$ | 4.62x | -12.7622 (ep +96) |
-| Uniform $10$ |  |  |
-| Uniform $5$ |  |  |
+| Uniform $10$ | 8.22x | -11.1319 (ep +81) |
+| Uniform $5$ | 13.48x | -8.9363 (ep +94) |
 | Linear $20 - 100$ | 1.67x | -9.5110 (ep +100) |
 | Linear $100 - 20$ | 1.69x | -13.2841 (ep +97) |
 | Linear $10 - 60$ |  |  |
