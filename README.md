@@ -98,14 +98,15 @@ We train the factorized model from scratch with **random initialization**, witho
 
 | Rank | Compression Ratio | Best Loss after Training |
 |---|---:|---:|
-| $k_{\mathrm{eff}}$ | 1.10× | -8.4764 (ep +100) |
-| Uniform $80$ | 1.27x | -9.5967 (ep +95) |
-| Uniform $40$ | 2.46x | -13.1355 (ep +97) |
-| Uniform $20$ | 4.62x | -12.7622 (ep +96) |
-| Uniform $10$ | 8.22x | -11.1319 (ep +81) |
-| Uniform $5$ | 13.48x | -8.9363 (ep +94) |
-| Linear $20 - 100$ | 1.67x | -9.5110 (ep +100) |
-| Linear $100 - 20$ | 1.69x | -13.2841 (ep +97) |
+| $k_{\mathrm{eff}}$ | 1.10× | -8.4764 (ep 100) |
+| Uniform $80$ | 1.27x | -9.5967 (ep 95) |
+| Uniform $40$ | 2.46x | -13.1355 (ep 97) |
+| Uniform $20$ | 4.62x | -12.7622 (ep 96) |
+| Uniform $10$ | 8.22x | -11.1319 (ep 81) |
+| Uniform $5$ | 13.48x | -8.9363 (ep 94) |
+| Linear $20 - 100$ | 1.67x | -9.5110 (ep 100) |
+| Linear $100 - 20$ | 1.69x | -13.2841 (ep 97) |
 | Linear $10 - 60$ |  |  |
 | Linear $60 - 10$ |  |  |
-
+| Linear $5 - 30$ |  |  |
+| Linear $30 - 5$ |  |  |
