@@ -106,7 +106,7 @@ We train the factorized model from scratch with **random initialization**, witho
 | Uniform $5$ | 13.48x | -8.9363 (ep 94) |
 | Linear $20 - 100$ | 1.67x | -9.5110 (ep 100) |
 | Linear $100 - 20$ | 1.69x | -13.2841 (ep 97) |
-| Linear $10 - 60$ |  |  |
-| Linear $60 - 10$ |  |  |
-| Linear $5 - 30$ |  |  |
-| Linear $30 - 5$ |  |  |
+| Linear $10 - 60$ | 2.77x | -12.3025 (ep 95) |
+| Linear $60 - 10$ | 2.81x | -13.0842 (ep 85) |
+| Linear $5 - 30$ | 5.16x | -12.2210 (ep 99) |
+| Linear $30 - 5$ | 5.22x | -12.0690 (ep 99) |
