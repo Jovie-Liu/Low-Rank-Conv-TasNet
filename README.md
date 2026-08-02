@@ -110,3 +110,10 @@ We train the factorized model from scratch with **random initialization**, witho
 | Linear $60 - 10$ | 2.81x | -13.0842 (ep 85) |
 | Linear $5 - 30$ | 5.16x | -12.2210 (ep 99) |
 | Linear $30 - 5$ | 5.22x | -12.0690 (ep 99) |
+
+**Summary:**
+
+- **Moderate rank constraints perform best from random initialization**: linear $100 \rightarrow 20$ gives the strongest final result at $-13.2841$, followed closely by uniform rank 40 at $-13.1355$.
+- **The transferred $k_{\mathrm{eff}}$ profile performs poorly from scratch**, reaching only $-8.4764$, which suggests that this rank distribution is most useful after the model has already learned its singular structure.
+- **Descending schedules generally outperform the corresponding ascending schedules**, especially for $100 \rightarrow 20$ versus $20 \rightarrow 100$ and $60 \rightarrow 10$ versus $10 \rightarrow 60$.
+- **Excessive compression degrades performance**: uniform ranks 10 and 5 provide large compression but substantially weaker final loss.
