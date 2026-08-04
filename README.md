@@ -88,7 +88,6 @@ Instead of waiting for full convergence, we factorize the model at **epoch 1, 5,
 - **$k_{\mathrm{eff}}$ remains the best checkpoint-based rank rule**, giving the strongest final performance at epochs 10, 5, and 1.  
 - **Later factorization is consistently better**: epoch 10 outperforms epoch 5 and epoch 1 across all rank schedules.  
 - **Descending rank schedules are consistently slightly stronger and converge faster than ascending ones**, showing that layer-wise rank allocation matters, not just overall compression.
-- The overall pattern suggests that **$k_{\mathrm{eff}}$ is best for preserving learned structure**, while **more structured or more constrained rank schedules may be better for training factorized models from scratch**.
 
 ---
 
